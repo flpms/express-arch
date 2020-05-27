@@ -12,6 +12,7 @@ const {
   DB_PORT,
   DB_NAME,
   DB_COLLECTION_USERS,
+  DB_TABLE_USER,
 } = process.env;
 
 const config = {
@@ -22,12 +23,13 @@ const config = {
     nodeEnv: NODE_ENV
   },
   db: {
-    username: DB_USERNAME || '',
-    password: DB_PASSWORD || '',
+  //   username: DB_USERNAME || '',
+  //   password: DB_PASSWORD || '',
     server: DB_SERVER,
     port: DB_PORT,
     database_name: DB_NAME,
-    userCollection: DB_COLLECTION_USERS,
+    userTable: DB_TABLE_USER,
+  //   userCollection: DB_COLLECTION_USERS,
   },
 }
 

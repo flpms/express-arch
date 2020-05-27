@@ -5,7 +5,7 @@ const postUserController = ({
   ObjectId,
   responseHandler,
 }) => (ctx) => findUser({
-  id: ObjectId(ctx.validData.id),
+  id: ctx.validData.id,
   ...responseHandler(ctx.request, ctx.response),
 });
 

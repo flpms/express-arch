@@ -5,9 +5,10 @@ const crypto = require('crypto');
 // const express = require('express');
 const bodyParser = require('koa-bodyparser');
 const koa = require('koa');
-const DB = require('simple-connection');
 
-const {ObjectId} = require('mongodb');
+// const DB = require('simple-connection');
+const pg = require('pg');
+// const {ObjectId} = require('mongodb');
 
 // const router = require('express').Router();
 
@@ -18,13 +19,15 @@ const routesV1 = require('./v1/');
 
 const {
   cryptograph,
+  PostgreConnector,
   responseHandler,
   validate,
 } = require('./commons/lib');
 
 const app = new koa(); // express();
 
-const db = new DB(config.env.db);
+const db = PostgreConnector(pg)(config.env.db);
+// const db = new DB(config.env.db);
 
 app.use(bodyParser());
 
@@ -44,7 +47,7 @@ const routerV1 = routesV1({
   cryptograph: cryptograph({ crypto }),
   config,
   db,
-  ObjectId,
+  // ObjectId,
   responseHandler,
   Router,
   validate,

@@ -6,7 +6,12 @@ const User = dependencies => {
   const findUser = async request => {
     const { id, onSuccess, onError} = request;
     try {
-      const [result] = await userRepository.find({ _id: id });
+      const result = await userRepository.find(id);
+
+      if (!result.length) {
+        return onError(404, err);
+      }
+
       result.senha = null;
       return onSuccess(200, result);
     } catch(err) {
@@ -22,11 +27,12 @@ const User = dependencies => {
 
       user.senha = cryptoPass;
 
-      const {ops:[result]} = await userRepository.insertOne(user);
+      const {rows:[{_id}]} = await userRepository.insertOne(user);
 
-      result.senha = null;
+      user._id = _id;
+      user.senha = null;
 
-      return onSuccess(200, result);
+      return onSuccess(200, user);
     } catch(err) {
       return onError(503, err);
     }
