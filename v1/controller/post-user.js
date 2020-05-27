@@ -3,9 +3,9 @@
 const postUserController = ({
   createUser,
   responseHandler,
-}) => (req, res) => createUser({
-  user: req.validBody,
-  ...responseHandler(req, res),
+}) => (ctx) => createUser({
+  user: ctx.validData,
+  ...responseHandler(ctx.request, ctx.response),
 });
 
 module.exports = postUserController; 

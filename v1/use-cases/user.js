@@ -10,7 +10,7 @@ const User = dependencies => {
       result.senha = null;
       return onSuccess(200, result);
     } catch(err) {
-      return onError(err);
+      return onError(503, err);
     }
   }
 
@@ -28,7 +28,7 @@ const User = dependencies => {
 
       return onSuccess(200, result);
     } catch(err) {
-      return onError(err);
+      return onError(503, err);
     }
   }
 

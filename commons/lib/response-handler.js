@@ -3,11 +3,17 @@
 const responseHandler = (con = console) => (request, response) => ({
   onError: (statusCode, err) => {
     con.error(`[${statusCode}] ${request.baseUrl}${request.path}`);
-    return response.status(statusCode).send({ message: err });
+    response.status = statusCode;
+    response.body = { message: err };
+    return response;
   },
   onSuccess: (statusCode, data) => {
-    con.error(`[${statusCode}] ${request.baseUrl}${request.path}`);
-    return response.status(statusCode).send(data);
+    con.info(`[${statusCode}] ${request.baseUrl}${request.path}`);
+
+    response.status = statusCode;
+    response.body = data;
+
+    return response;
   }
 });
 

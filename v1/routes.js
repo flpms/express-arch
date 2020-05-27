@@ -3,12 +3,16 @@
 module.exports = (dependencies) => {
   const {
     db,
-    router,
+    Router,
     useCase,
     controller,
     repository,
     schema: { post, get },
   } = dependencies;
+
+  const router = new Router({
+    prefix: '/v1'
+  });
 
   const {
     findUserController,

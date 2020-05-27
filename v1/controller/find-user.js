@@ -4,9 +4,9 @@ const postUserController = ({
   findUser,
   ObjectId,
   responseHandler,
-}) => (req, res) => findUser({
-  id: ObjectId(req.validData.id),
-  ...responseHandler(req, res),
+}) => (ctx) => findUser({
+  id: ObjectId(ctx.validData.id),
+  ...responseHandler(ctx.request, ctx.response),
 });
 
 module.exports = postUserController; 
